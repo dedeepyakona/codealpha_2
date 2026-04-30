@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 import json
+import os
 
 app = Flask(__name__)
 
@@ -83,21 +84,18 @@ def chat():
         user_message = data.get("message", "").strip().lower()
         state = data.get("state", {})
 
-        # ✅ QUIT SUPPORT (ADDED)
         if user_message in ["quit", "exit", "bye"]:
             return jsonify({
                 "reply": "Goodbye! Stay stylish 💫",
                 "state": {}
             })
 
-        # START
         if user_message == "start":
             return jsonify({
                 "reply": "✨ What would you like to do?\n1. Body Shape Detection\n2. Outfit Suggestions",
                 "state": {"step": "main_menu"}
             })
 
-        # MAIN MENU
         if state.get("step") == "main_menu":
             if user_message == "1":
                 return jsonify({
@@ -110,8 +108,8 @@ def chat():
                     "state": {"step": "manual_shape"}
                 })
 
-        # BODY QUIZ
         steps = ["waist", "shoulders", "hips", "bust", "height", "size"]
+
         questions = {
             "waist": "Shoulders (1. broad / 2. medium / 3. narrow):",
             "shoulders": "Hips (1. wide / 2. medium / 3. narrow):",
@@ -136,7 +134,6 @@ def chat():
                     "state": {"step": "ask_suggestion", "shape": shape}
                 })
 
-        # MANUAL SHAPE
         if state.get("step") == "manual_shape":
             mapping = {
                 "1": "Hourglass",
@@ -155,7 +152,6 @@ def chat():
                 "state": {"step": "ask_suggestion", "shape": shape}
             })
 
-        # ASK SUGGESTION
         if state.get("step") == "ask_suggestion":
             if user_message in ["yes", "y"]:
                 return jsonify({
@@ -168,14 +164,12 @@ def chat():
                     "state": {}
                 })
 
-        # OCCASION
         if state.get("step") == "occasion":
             return jsonify({
                 "reply": "✨ What do you want?\n1. Jeans 2. Tops 3. Ethnic",
                 "state": {"step": "outfit", "shape": state["shape"]}
             })
 
-        # OUTFIT
         if state.get("step") == "outfit":
             shape = state.get("shape")
 
@@ -196,7 +190,6 @@ def chat():
 
             return jsonify({"reply": response, "state": {}})
 
-        # DEFAULT
         return jsonify({
             "reply": get_intent_response(user_message),
             "state": state
@@ -206,11 +199,7 @@ def chat():
         print("ERROR:", e)
         return jsonify({"reply": "⚠ Server error", "state": {}})
 
-# RUN
+# ---------------- RUN (RAILWAY SAFE) ----------------
 if __name__ == "__main__":
-    app.run(debug=True)
-    import os
-
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get("PORT", 8080))
     app.run(host="0.0.0.0", port=port)

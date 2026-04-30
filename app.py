@@ -4,8 +4,9 @@ import os
 
 app = Flask(__name__)
 
-# Load intents
-with open('intents.json', encoding="utf-8") as file:
+# ✅ FIXED: Safe path for intents.json (important for Render)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+with open(os.path.join(BASE_DIR, "intents.json"), encoding="utf-8") as file:
     data = json.load(file)
 
 # ---------------- INTENT RESPONSE ----------------
@@ -80,15 +81,12 @@ def home():
 @app.route("/chat", methods=["POST"])
 def chat():
     try:
-        data = request.get_json()
-        user_message = data.get("message", "").strip().lower()
-        state = data.get("state", {})
+        req_data = request.get_json()
+        user_message = req_data.get("message", "").strip().lower()
+        state = req_data.get("state", {})
 
         if user_message in ["quit", "exit", "bye"]:
-            return jsonify({
-                "reply": "Goodbye! Stay stylish 💫",
-                "state": {}
-            })
+            return jsonify({"reply": "Goodbye! Stay stylish 💫", "state": {}})
 
         if user_message == "start":
             return jsonify({
@@ -159,10 +157,7 @@ def chat():
                     "state": {"step": "occasion", "shape": state["shape"]}
                 })
             else:
-                return jsonify({
-                    "reply": "👍 Okay! Type 'start' anytime 💖",
-                    "state": {}
-                })
+                return jsonify({"reply": "👍 Okay! Type 'start' anytime 💖", "state": {}})
 
         if state.get("step") == "occasion":
             return jsonify({
@@ -190,16 +185,13 @@ def chat():
 
             return jsonify({"reply": response, "state": {}})
 
-        return jsonify({
-            "reply": get_intent_response(user_message),
-            "state": state
-        })
+        return jsonify({"reply": get_intent_response(user_message), "state": state})
 
     except Exception as e:
         print("ERROR:", e)
         return jsonify({"reply": "⚠ Server error", "state": {}})
 
-# ---------------- RUN (RAILWAY SAFE) ----------------
+# ✅ LOCAL RUN (Render uses gunicorn instead)
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8080))
+    port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)

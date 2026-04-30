@@ -2,7 +2,7 @@
   "intents": [
     {
       "tag": "start",
-      "patterns": ["start", "let's start", "begin", "go", "menu"],
+      "patterns": ["start", "lets start", "begin", "go", "menu"],
       "responses": [
         "✨ Great! Let's begin StylAI 💖\n\nChoose an option:\n1️⃣ Body Type Detection\n2️⃣ Outfit Suggestions\n3️⃣ Casual Styling Tips"
       ]
@@ -51,11 +51,11 @@
     {
       "tag": "body_type_detection",
       "patterns": [
-        "I have broad shoulders and narrow hips",
-        "my waist is not defined",
-        "I have wide hips and small shoulders",
-        "my body is straight without curves",
-        "I have balanced bust and hips with a defined waist"
+        "broad shoulders narrow hips",
+        "waist not defined",
+        "wide hips small shoulders",
+        "straight body no curves",
+        "balanced bust hips defined waist"
       ],
       "responses": [
         "Got it! 💫 I can analyze your features and guide you with the best styling suggestions 👗✨",
@@ -65,59 +65,59 @@
     {
       "tag": "styling_by_body_type",
       "patterns": [
-        "jeans and tops for pear body",
-        "what should apple body wear",
-        "outfits for hourglass body",
-        "clothes for rectangle body shape",
-        "what suits inverted triangle body",
-        "styling tips for lean body"
+        "jeans for pear body",
+        "apple body outfits",
+        "hourglass outfits",
+        "rectangle body clothes",
+        "inverted triangle styling",
+        "lean body styling"
       ],
       "responses": [
-        "Body Type: Pear 💖\nJeans: Bootcut, wide-leg, and high-waisted jeans help balance wider hips 👖✨\nTops: Off-shoulder, puff sleeves, and detailed necklines enhance your upper body 👚\nOccasion Wear: A-line lehengas, flared anarkalis, and embellished blouses 👗\nStyling Tip: Highlight your upper body with brighter colors 💫",
+        "Body Type: Pear 💖\nJeans: Bootcut, wide-leg, and high-waisted jeans 👖\nTops: Off-shoulder, puff sleeves 👚\nTip: Highlight upper body 💫",
 
-        "Body Type: Apple 💖\nJeans: Straight-leg and high-waisted jeans provide structure 👖\nTops: Flowy tops and V-necks create a balanced silhouette 👚✨\nOccasion Wear: Anarkalis, sarees with flowy drapes, and simple kurtis 👗\nStyling Tip: Avoid overly tight waist fits 💫",
+        "Body Type: Apple 💖\nJeans: Straight-leg jeans 👖\nTops: V-neck, flowy tops 👚\nTip: Avoid tight waist fits 💫",
 
-        "Body Type: Hourglass 💖\nJeans: Skinny and high-waisted jeans highlight your natural curves 👖✨\nTops: Fitted tops, wrap styles, and crop tops enhance your waist 👚\nOccasion Wear: Well-fitted lehengas, sarees, and crop-top sets 👗\nStyling Tip: Emphasize your waist and avoid overly loose outfits 💫",
+        "Body Type: Hourglass 💖\nJeans: Skinny jeans 👖\nTops: Fitted styles 👚\nTip: Emphasize waist 💫",
 
-        "Body Type: Rectangle 💖\nJeans: Mom jeans, flared jeans, and mid-rise styles create curves 👖✨\nTops: Peplum tops, ruffles, and layered designs add dimension 👚\nOccasion Wear: Layered lehengas, shararas, and detailed kurtis 👗\nStyling Tip: Add volume to both upper and lower body 💫",
+        "Body Type: Rectangle 💖\nJeans: Flared or mom jeans 👖\nTops: Peplum or ruffles 👚\nTip: Add curves 💫",
 
-        "Body Type: Inverted Triangle 💖\nJeans: Straight-leg, bootcut, and wide-leg jeans balance broader shoulders 👖✨\nTops: Keep tops simple and avoid heavy shoulder detailing 👚\nOccasion Wear: Flowy lehengas, sarees with heavy bottoms, and shararas 👗\nStyling Tip: Focus attention on the lower body 💫",
+        "Body Type: Inverted Triangle 💖\nJeans: Wide-leg 👖\nTops: Simple tops 👚\nTip: Focus on lower body 💫",
 
-        "Body Type: Lean Column 💖\nJeans: Slim-fit, straight, and slightly flared jeans add subtle curves 👖✨\nTops: Layered tops, textured fabrics, and crop tops enhance shape 👚\nOccasion Wear: Structured lehengas, layered anarkalis, and shararas 👗\nStyling Tip: Use layers and textures to create dimension 💫"
+        "Body Type: Lean Column 💖\nJeans: Slim-fit 👖\nTops: Layered styles 👚\nTip: Add texture 💫"
       ]
     },
     {
       "tag": "party_outfit",
       "patterns": [
-        "what should I wear to a party",
-        "party outfit ideas",
+        "party outfit",
+        "what to wear party",
         "dress for party"
       ],
       "responses": [
-        "For a party 💃, go for a bold outfit like a fitted dress, stylish jumpsuit, or trendy co-ord set ✨ Pair it with statement accessories 💖",
-        "Party outfits should stand out 💫—try sleek dresses, crop-top sets, or elegant sarees 👗✨"
+        "For a party 💃, try fitted dresses, jumpsuits, or co-ord sets ✨",
+        "Party looks 💫 should stand out—go bold with accessories 💖"
       ]
     },
     {
       "tag": "college_outfit",
       "patterns": [
-        "what to wear to college",
-        "college outfit ideas"
+        "college outfit",
+        "what to wear college"
       ],
       "responses": [
-        "For college 🎒, keep it comfortable yet stylish—jeans with tops, kurtis, or casual shirts 👖👚✨",
-        "A smart college look 💖 includes relaxed fits, minimal accessories, and breathable fabrics 💫"
+        "For college 🎒, go with jeans, tops, or kurtis 👖👚✨",
+        "Keep it simple, comfy, and stylish 💖"
       ]
     },
     {
       "tag": "casual_outfit",
       "patterns": [
-        "casual outfit ideas",
-        "daily wear suggestions"
+        "casual outfit",
+        "daily wear"
       ],
       "responses": [
-        "For casual wear 🌸, go with comfortable outfits like t-shirts, jeans, and simple dresses 👖👗✨",
-        "Casual styling 💫 is all about comfort—choose easy-going outfits with good fit and soft colors 💖"
+        "For casual wear 🌸, choose comfy outfits like t-shirts and jeans 👖✨",
+        "Comfort + style = perfect casual look 💫"
       ]
     }
   ]

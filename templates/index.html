@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>StylAI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* YOUR ORIGINAL CSS */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Poppins", sans-serif;
+            background-color: #FFC8DD;
+            overflow-x: hidden;
+        }
+
+        .bg-pattern {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: url("https://www.transparenttextures.com/patterns/fabric-of-squares.png");
+            opacity: 0.12;
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            width: 90%;
+            max-width: 520px;
+            margin: auto;
+            padding-top: 35px;
+            text-align: center;
+        }
+
+        .logo {
+            font-family: 'Dancing Script', cursive;
+            font-size: 56px;
+            color: #b3005e;
+            text-shadow: 0px 2px 12px rgba(179, 0, 94, 0.25);
+        }
+
+        .tagline {
+            margin-top: -8px;
+            margin-bottom: 22px;
+            font-size: 14px;
+            color: #7a1f4b;
+            opacity: 0.85;
+            letter-spacing: 0.5px;
+        }
+
+        .chatbox {
+            background-color: #ffcad4;
+            border-radius: 22px;
+            padding: 20px;
+            height: 460px;
+            overflow-y: auto;
+            border: 2px solid #b3005e;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+            text-align: left;
+            scroll-behavior: smooth;
+        }
+
+        .bot {
+            background: #ffffff;
+            color: #333;
+            padding: 10px 14px;
+            border-radius: 14px;
+            margin-bottom: 10px;
+            width: fit-content;
+            max-width: 75%;
+            word-wrap: break-word;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .user {
+            background: #b3005e;
+            color: white;
+            padding: 10px 14px;
+            border-radius: 14px;
+            margin-bottom: 10px;
+            margin-left: auto;
+            width: fit-content;
+            max-width: 75%;
+            word-wrap: break-word;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .input-box {
+            display: flex;
+            margin-top: 16px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        input {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            outline: none;
+            font-size: 14px;
+            background: #fff;
+        }
+
+        button {
+            padding: 12px 18px;
+            border: none;
+            background: #b3005e;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: 500;
+        }
+
+        button:hover { background: #800040; }
+
+        .chatbox::-webkit-scrollbar { width: 6px; }
+        .chatbox::-webkit-scrollbar-thumb {
+            background: #b3005e;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-pattern"></div>
+
+<div class="container">
+    <h1 class="logo">StylAI</h1>
+    <p class="tagline">Celebrating beauty in every form ✨</p>
+
+    <div class="chatbox" id="chatbox">
+        <p class="bot">Hi! I'm your styling assistant 💖</p>
+    </div>
+
+    <div class="input-box">
+        <input type="text" id="userInput" placeholder="Type your message...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<script>
+let userState = {};  // ⭐ stores conversation state
+
+async function sendMessage() {
+    let inputBox = document.getElementById("userInput");
+    let input = inputBox.value.trim();
+    if (input === "") return;
+
+    let chatbox = document.getElementById("chatbox");
+
+    // show user message
+    chatbox.innerHTML += "<p class='user'>" + input + "</p>";
+    inputBox.value = "";
+
+    try {
+        let response = await fetch("/chat", {   // ✅ fixed route
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                message: input,
+                state: userState   // ✅ send state
+            })
+        });
+
+        let data = await response.json();
+
+        // ✅ store state for next message
+        userState = data.state || {};
+
+        chatbox.innerHTML += "<p class='bot'>" + data.reply + "</p>";
+        chatbox.scrollTop = chatbox.scrollHeight;
+
+    } catch (error) {
+        chatbox.innerHTML += "<p class='bot'>⚠ Server error.</p>";
+    }
+}
+
+// enter key support
+document.getElementById("userInput").addEventListener("keypress", function(event) {
+    if (event.key === "Enter") sendMessage();
+});
+</script>
+</body>
+</html>
